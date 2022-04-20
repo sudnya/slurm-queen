@@ -26,7 +26,7 @@ variable "keys" {
 }
 
 variable "instance_type" {
-  default = "t2.nano"
+  default = "t3.large"
 }
 
 variable "aws_access_key_id" {
@@ -39,6 +39,11 @@ variable "aws_secret_access_key" {
  type        = string
 }
 
+variable "private_key_path" {
+ description = "The ssh pem file path that is able to access the EC2 nodes."
+ type        = string
+ default     = "/Users/sudnya/Downloads/terraform-keys-east2.pem"
+}
 
 
 # Configure the AWS Provider
@@ -188,27 +193,27 @@ resource "aws_instance" "first-terraform-ec2" {
 }
 
 
-#resource "null_resource" "first-terraform-ec2" {
-#  // copy our example script to the server
-#  provisioner "file" {
-#    source      = "actual.sh"
-#    destination = "/tmp/provision.sh"
-#  }
-#
-#  // change permissions to executable and pipe its output into a new file
-#  provisioner "remote-exec" {
-#    inline = [
-#      "chmod +x /tmp/provision.sh",
-#      "/tmp/provision.sh",
-#    ]
-#  }
-#
-#  connection {
-#      type = "ssh"
-#      host = aws_instance.first-terraform-ec2.public_ip
-#      user = "ubuntu"
-#   }
-#}
+resource "null_resource" "first-terraform-ec2" {
+  // copy our example script to the server
+  provisioner "file" {
+    source      = "../scripts/provision-slurm-controller.sh"
+    destination = "/tmp/provision-slurm-controller.sh"
+  }
+
+  // change permissions to executable and pipe its output into a new file
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/provision-slurm-controller.sh",
+      "/tmp/provision-slurm-controller.sh",
+    ]
+  }
+  connection {
+      type = "ssh"
+      host = aws_instance.first-terraform-ec2.public_ip
+      private_key = "${file(var.private_key_path)}"
+      user = "ubuntu"
+  }
+}
 
 terraform {
   backend "s3" {
