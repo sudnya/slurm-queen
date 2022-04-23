@@ -7,11 +7,14 @@ services:
         hostname: slurm_controller
         user: admin
         volumes:
-                - shared-vol:/home/admin
+          - type: volume
+            source: shared-vol
+            target: /home/admin
         ports:
                 - 6817:6817
                 - 6818:6818
                 - 6819:6819
+                - 5001:8000
   slurm_node1:
         build:
             context: ../platform/slurm_node/

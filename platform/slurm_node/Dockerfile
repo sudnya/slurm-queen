@@ -11,6 +11,9 @@ RUN apt update -y && apt install libopenmpi-dev -y
 COPY slurm.conf /etc/slurm-llnl/
 COPY cgroup.conf /etc/slurm-llnl/
 COPY docker-entrypoint.sh /etc/slurm-llnl/
+COPY munge.key /etc/munge/
+
+RUN chown munge /etc/munge/munge.key
 
 EXPOSE 6817 6818 6819
 
