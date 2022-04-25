@@ -1,0 +1,6 @@
+
+slurm_queen:
+  home_path: "/home/admin"
+
+verbose: True
+verbose_info: True
