@@ -17,9 +17,9 @@ def run(job_config: dict):
         bash_script_path = bash_script_file.name
 
         script_contents = """#!/bin/bash
-        sleep 10
+        docker run {}
         echo "Running job!"
-        """
+        """.format(config["slurm_queen"]["job_docker_image"])
 
         bash_script_file.write(script_contents)       
         bash_script_file.flush()

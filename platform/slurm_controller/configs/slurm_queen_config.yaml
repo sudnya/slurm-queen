@@ -1,6 +1,7 @@
 
 slurm_queen:
   home_path: "/home/admin"
+  job_docker_image: "sample_job:latest"
 
 verbose: True
 verbose_info: True
