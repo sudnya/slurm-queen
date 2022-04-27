@@ -2,7 +2,6 @@ from slurm_queen.util.config import get_config
 
 import subprocess
 
-import tempfile
 import logging
 
 logger = logging.getLogger(__name__)
@@ -12,19 +11,10 @@ def run(job_config: dict):
 
     config = get_config()
 
-    with tempfile.NamedTemporaryFile(mode="w", dir=config["slurm_queen"]["home_path"]) as bash_script_file:
-        bash_script_path = bash_script_file.name
+    bash_script_path = config["slurm_queen"]["entrypoint"]
 
-        script_contents = """#!/bin/bash
-        sleep 10
-        echo "Running job!"
-        """
-
-        bash_script_file.write(script_contents)       
-        bash_script_file.flush()
-
-        run_command = ["sbatch", bash_script_path]
-        result = subprocess.run(run_command, cwd=config["slurm_queen"]["home_path"], stdout = subprocess.PIPE)
+    run_command = ["sbatch", bash_script_path]
+    result = subprocess.run(run_command, cwd=config["slurm_queen"]["home_path"], stdout = subprocess.PIPE)
     return {
         "message" : result.stdout
     }

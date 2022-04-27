@@ -1,0 +1,26 @@
+orm:
+    engine: 'postgresql://postgres:secret@oltp-database:5432/default_db'
+
+data_studio:
+    upload:
+        path: 's3://data-dev-ai/studio'
+
+    browser:
+        dataset_path: 's3://data-dev-ai/studio/datasets'
+
+slurm_queen:
+    entrypoint: '/home/admin/start_training.sh'
+    home_path: '/home/admin'
+
+support:
+    get_url:
+        expiration: 518400
+    aws:
+        region: 'us-east-2'
+
+model_iteration:
+    trainer:
+        endpoint: "http://slurm_controller:8000/api/v1/run"
+
+verbose: True
+verbose_info: True
