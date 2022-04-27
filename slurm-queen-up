@@ -15,6 +15,10 @@ LOCAL_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd
 # build the docker image for the supported jobs
 $LOCAL_DIRECTORY/platform/sample_job/build.sh 
 
+#cp  slurm config files to the controller and node build context
+
+cp -r $LOCAL_DIRECTORY/slurm_configs $LOCAL_DIRECTORY/platform/slurm_controller/
+cp -r $LOCAL_DIRECTORY/slurm_configs $LOCAL_DIRECTORY/platform/slurm_node/
 
 docker-compose -f $LOCAL_DIRECTORY/scripts/docker-compose.yaml up --build $@
 

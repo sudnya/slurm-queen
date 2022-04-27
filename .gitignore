@@ -1,3 +1,6 @@
+platform/slurm_controller/slurm_configs
+platform/slurm_node/slurm_configs
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

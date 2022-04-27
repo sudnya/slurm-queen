@@ -25,9 +25,9 @@ COPY . /app/${PACKAGE_NAME}
 WORKDIR /app/${PACKAGE_NAME}
 
 # Copy slurm config files
-COPY slurm.conf /etc/slurm-llnl/
-COPY cgroup.conf /etc/slurm-llnl/
-COPY munge.key /etc/munge/
+COPY slurm_configs/slurm.conf /etc/slurm-llnl/
+COPY slurm_configs/cgroup.conf /etc/slurm-llnl/
+COPY slurm_configs/munge.key /etc/munge/
 RUN chown munge /etc/munge/munge.key
 RUN chmod 600 /etc/munge/munge.key
 
