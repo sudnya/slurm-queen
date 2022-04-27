@@ -63,7 +63,6 @@ def status(id: int):
         "message" : result.stdout
     }
 
-
 def cancel(id: int):
     logger.info("Cancel {}".format(id))
 
