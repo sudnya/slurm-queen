@@ -12,9 +12,5 @@ set -Eeuoxa pipefail
 # Get the directory of this script
 LOCAL_DIRECTORY="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# build the docker image for the supported jobs
-$LOCAL_DIRECTORY/platform/sample_job/build.sh 
-
-
-docker-compose -f $LOCAL_DIRECTORY/scripts/docker-compose.yaml up --build $@
+docker build -t sample_job:latest $LOCAL_DIRECTORY/.
 

@@ -21,7 +21,12 @@ services:
         hostname: slurm_node1
         user: admin
         volumes:
-                - shared-vol:/home/admin
+          - type: volume
+            source: shared-vol
+            target: /home/admin
+          - type: bind
+            source: /var/run/docker.sock
+            target: /var/run/docker.sock
         environment:
                 - SLURM_NODENAME=slurm_node1
         links:
