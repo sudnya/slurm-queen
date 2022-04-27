@@ -8,10 +8,10 @@ RUN apt install sudo -y && apt install python3.9 python3-pip -y && useradd -m ad
 
 RUN apt update -y && apt install libopenmpi-dev -y && apt install -y docker.io
 
-COPY slurm.conf /etc/slurm-llnl/
-COPY cgroup.conf /etc/slurm-llnl/
+COPY slurm_configs/slurm.conf /etc/slurm-llnl/
+COPY slurm_configs/cgroup.conf /etc/slurm-llnl/
+COPY slurm_configs/munge.key /etc/munge/
 COPY docker-entrypoint.sh /etc/slurm-llnl/
-COPY munge.key /etc/munge/
 
 RUN chown munge /etc/munge/munge.key
 RUN chmod 600 /etc/munge/munge.key
