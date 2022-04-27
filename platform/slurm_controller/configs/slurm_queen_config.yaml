@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-
 slurm_queen:
   home_path: "/home/admin"
 
-=======
->>>>>>> 937fcef (ENH: Added slurm queen endpoints in fastapi.)
 verbose: True
 verbose_info: True

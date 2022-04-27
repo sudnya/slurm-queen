@@ -1,4 +1,4 @@
-FROM python:3.9
+FROM ubuntu:20.04
 
 ARG PACKAGE_NAME="slurm-queen"
 
@@ -7,7 +7,7 @@ RUN apt update -y && apt install munge -y && apt install vim -y && apt install b
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt install slurmd slurm-client slurmctld -y
-RUN useradd -m admin -s /usr/bin/bash -d /home/admin && echo "admin:admin" | chpasswd && adduser admin sudo && echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN apt install sudo -y && apt install python3.9 python3-pip -y && useradd -m admin -s /usr/bin/bash -d /home/admin && echo "admin:admin" | chpasswd && adduser admin sudo && echo "admin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 RUN apt update -y && apt install libopenmpi-dev -y
 
