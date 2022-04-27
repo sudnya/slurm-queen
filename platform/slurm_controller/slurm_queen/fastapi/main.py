@@ -27,10 +27,13 @@ def get_queue():
 def info():
     return slurm_queen.info()
 
+<<<<<<< HEAD
 @app.get("/api/v1/status")
 def cancel(id: int):
     return slurm_queen.status(id)
 
+=======
+>>>>>>> 937fcef (ENH: Added slurm queen endpoints in fastapi.)
 @app.post("/api/v1/cancel")
 def cancel(id: int):
     return slurm_queen.cancel(id)
